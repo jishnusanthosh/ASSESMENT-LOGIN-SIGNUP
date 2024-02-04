@@ -30,9 +30,15 @@ const Signup = () => {
 
     try {
       const response = await axios.post('http://localhost:5000/api/signup', formData);
-      console.log(response.data);
+      console.log(response);
+     
+     if (response.data) {
       toast.success('Signup successful! Please log in.');
-      navigate('/login');
+      navigate('/');
+     } else {
+      toast.error('Signup failed');
+     } 
+      
     } catch (error) {
       console.error(error.response.data);
       toast.error('Signup failed. Please try again.');

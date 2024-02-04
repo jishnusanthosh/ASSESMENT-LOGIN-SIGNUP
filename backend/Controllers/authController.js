@@ -4,20 +4,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const loginUser = async (req, res) => {
-  console.log((req.body));
   const { username, password } = req.body;
-
   try {
     // Find user by username
     const user = await User.findOne({username });
-
-    console.log("user found", user); // Log the user object
-
     // Check if user exists
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
-
     // Check if the password is correct
     if (bcrypt.compareSync(password, user.password)) {
       // Generate and return JWT token
@@ -49,10 +43,7 @@ const signup = async (req, res) => {
     const newUser = new User({ username, email, password });
     await newUser.save();
 
-    // Generate JWT
-    const token = jwt.sign({ userId: newUser._id }, 'your-secret-key', { expiresIn: '1h' });
-
-    res.status(201).json({ token, userId: newUser._id });
+    res.status(201).json(true);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

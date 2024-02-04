@@ -8,7 +8,7 @@ import { AuthProvider } from './Context/AuthContext';  // Import AuthProvider
 
 const App = () => {
   return (
-    <AuthProvider>  {/* Wrap the entire app with AuthProvider */}
+    <AuthProvider>  
       <Router>
         <Routes>
           <Route path="/login" element={<LoginForm />} />
